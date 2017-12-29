@@ -1,0 +1,23 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node server/index.js", 
+    "heroku-postbuild" : "cd client/ && npm install --only=dev && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tenination/my-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tenination/my-app/issues"
+  },
+  "homepage": "https://github.com/tenination/my-app#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
