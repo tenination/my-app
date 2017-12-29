@@ -12,9 +12,8 @@ class App extends Component {
   handleClick() {
     console.log('Clicked!');
     axios.get('/api')
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
-
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   }
 
   render() {
