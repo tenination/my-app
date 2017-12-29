@@ -9,8 +9,9 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 //Answer API requests
 app.get('/api', function(req, res) {
+	console.log('/api endpoint requested!');
 	res.set('Content-Type', 'application/json');
-	res.send('{"message": "Hello from the custom server!"}');
+	res.send('{"message": "Hello from the only custom server in the world!"}');
 });
 
 //All remaining requests return the React app, so it can handle routing.
@@ -20,4 +21,5 @@ app.get('*', function(request, response) {
 
 app.listen(PORT, function() {
 	console.log(`Listening on port ${PORT}`);
+	console.log('process.env.PORT is ', process.env.PORT);
 });
