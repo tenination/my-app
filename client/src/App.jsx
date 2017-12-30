@@ -11,7 +11,7 @@ class App extends Component {
 
   handleClick() {
     console.log('Clicked!');
-    axios.get('/api')
+    axios.get('/db')
       .then(response => console.log(response))
       .catch(error => console.log(error));
   }
