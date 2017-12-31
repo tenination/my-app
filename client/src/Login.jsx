@@ -9,7 +9,7 @@ const Login = props => (
     <h1>Login</h1>
     <input type="text" onChange={props.handleUsername} /><span>Username</span>
     <br />
-    <input type="text" onChange={props.handlePassword} /><span>Password</span>
+    <input type="password" onChange={props.handlePassword} /><span>Password</span>
     <br />
     <button onClick={props.handleSubmit}>Submit</button>
     <li><Link to="/">Don't have an account?</Link></li>
