@@ -18,6 +18,7 @@ class App extends Component {
       username: '',
       password: '',
       signedUp: false,
+      loggedIn: false, // eslint-disable-line
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleTest = this.handleTest.bind(this);
@@ -68,7 +69,9 @@ class App extends Component {
       console.log('/LOGIN');
       axios.post('/login', credentialsPayload)
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
+          const bcryptHashMatch = response.data;
+          this.setState({ loggedIn: bcryptHashMatch }); // eslint-disable-line
         })
         .catch((error) => {
           console.log(error);
@@ -89,7 +92,7 @@ class App extends Component {
   }
 
   render() {
-    const { signedUp } = this.state;
+    const { signedUp, loggedIn } = this.state;
     return (
       <Router>
         <div>
@@ -113,8 +116,14 @@ class App extends Component {
               />
           )}
           />
-          <Route exact path="/" component={Home} />
+          <Route
+            path="/home"
+            render={() => (
+              <Home />
+          )}
+          />
           {signedUp && (<Redirect to="/login" />)}
+          {loggedIn && (<Redirect to="/home" />)}
         </div>
       </Router>
     );
