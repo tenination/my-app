@@ -53,18 +53,18 @@ app.post('/login', (req, res) => {
   User.login(username)
     .then((result) => {
       if (result) {
-        res.status(201).send(result);
+        bcrypt.compare(password, result.password)
+          .then(match => res.status(201).send(match));
       } else {
         res.status(400).send('error');
       }
-    })
-    .catch(err => res.status(400).send(err));
+    });
 });
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-}); 
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
