@@ -1,12 +1,11 @@
+/* eslint-disable */
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+  Link,
 } from 'react-router-dom';
 
-const Login = (props) => (
-  <div style={{padding: '20px', margin: '100px 100px 100px 40%'}}>
+const Login = props => (
+  <div style={{ padding: '20px', margin: '100px 100px 100px 40%' }}>
     <h1>Login</h1>
     <input type="text" onChange={props.handleUsername} /><span>Username</span>
     <br />

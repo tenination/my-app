@@ -19,6 +19,7 @@ class App extends Component {
       password: '',
       signedUp: false,
       loggedIn: false, // eslint-disable-line
+      loggedInUsername: '',
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleTest = this.handleTest.bind(this);
@@ -43,7 +44,7 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({ signedUp: false });
+    this.setState({ signedUp: false, loggedIn: false });
     console.log('Submit pressed!');
     console.log('username is:', this.state.username);
     console.log('password is:', this.state.password);
@@ -71,7 +72,7 @@ class App extends Component {
         .then((response) => {
           console.log(response.data);
           const bcryptHashMatch = response.data;
-          this.setState({ loggedIn: bcryptHashMatch }); // eslint-disable-line
+          this.setState({ loggedIn: bcryptHashMatch, loggedInUsername: this.state.username }); // eslint-disable-line
         })
         .catch((error) => {
           console.log(error);
@@ -119,7 +120,9 @@ class App extends Component {
           <Route
             path="/home"
             render={() => (
-              <Home />
+              <Home
+                username={this.state.loggedInUsername}
+              />
           )}
           />
           {signedUp && (<Redirect to="/login" />)}
