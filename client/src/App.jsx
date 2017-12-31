@@ -53,8 +53,8 @@ class App extends Component {
       password: this.state.password,
     };
 
-    if (window.location.pathname === '/signup') { // eslint-disable-line
-      console.log('/SIGNUP');
+    if (window.location.pathname === '/') { // eslint-disable-line
+      console.log('/');
       axios.post('/signup', credentialsPayload)
         .then((response) => {
           console.log(response);
@@ -98,7 +98,7 @@ class App extends Component {
       <Router>
         <div>
           <Route
-            path="/signup"
+            exact path="/"
             render={() => (
               <Signup
                 handleUsername={this.handleUsername}
