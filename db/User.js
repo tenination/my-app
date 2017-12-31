@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-/* eslint-disable */
 
 const Schema = mongoose.Schema; // eslint-disable-line
 
@@ -22,16 +21,28 @@ User.getAllUsers = () => (
   User.find({})
 );
 
-User.addUser = function() {
-	let newUser = User({
-		username: 'johndoe',
-		password: '12345',
-	});
+User.login = username => (
+  User.findOne({ username }).exec()
+    .then(user => user)
+    .catch(err => err)
+);
 
-	newUser.save(function(err) {
-		if (err) throw err;
-		console.log('johndoe is created!');
-	});
+
+User.signup = (username, password, cb) => {
+  const newUser = User({
+    username,
+    password,
+  });
+
+  newUser.save((err, success) => {
+    if (err) {
+      console.log('error is', err);
+      cb(err);
+    } else {
+      console.log('newUser save: ', success);
+      cb(null, success);
+    }
+  });
 };
 
 module.exports = User;
