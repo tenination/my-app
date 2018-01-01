@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const User = require('../db/User.js');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,14 +19,10 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use(session({
   secret: 'keyboard cat',
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   resave: false,
   saveUninitialized: true,
 }));
-
-app.use((req, res, next) => {
-  req.session.awesome = 100;
-  next();
-});
 
 // Answer API requests
 app.get('/api', (req, res) => {
